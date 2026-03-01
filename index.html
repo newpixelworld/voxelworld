@@ -7,16 +7,62 @@
   <style>
     html, body { margin:0; height:100%; overflow:hidden; background:#0b0f14; font-family: Arial, Helvetica, sans-serif; }
     #ui {
-      position: fixed; top: 16px; right: 16px; width: 360px; /* CAMBIATO: right invece di left */
+      position: fixed; top: 16px; right: 16px; width: 360px;
       padding: 16px; border-radius: 14px;
       background: rgba(0,0,0,0.55); color: #fff;
       border: 1px solid rgba(255,255,255,0.12);
       backdrop-filter: blur(10px);
-      pointer-events: none; /* NUOVO: UI trasparente agli eventi */
+      pointer-events: none;
     }
-    #ui * { pointer-events: auto; } /* Solo i bottoni catturano eventi */
+    #ui * { pointer-events: auto; }
     #title { font-size: 20px; font-weight: 700; margin:0 0 4px 0; }
     #modeTxt { opacity: .85; margin: 0 0 12px 0; }
     .row { margin: 10px 0; }
     .label { opacity: .8; font-size: 12px; }
-    .value { font-size: 18px
+    .value { font-size: 18px; font-weight: 700; margin-top: 2px; }
+    input[type="range"]{ width:100%; }
+    button {
+      width:100%; padding: 12px 14px; margin-top: 10px;
+      border-radius: 10px; border:0; cursor:pointer; font-weight:700;
+    }
+    #payBtn { background:#2ecc71; color:#0b0f14; }
+    #payBtn:disabled { opacity:.5; cursor:not-allowed; }
+    #clearBtn { background:#2b3440; color:#fff; }
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.1/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.1/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="ui">
+    <div id="title">VoxelDollarPage</div>
+    <div id="modeTxt">Click = 1 voxel, Drag = block</div>
+
+    <div class="row">
+      <div class="label">Selection</div>
+      <div class="value" id="selTxt">None</div>
+    </div>
+
+    <div class="row">
+      <div class="label">Voxels · Price</div>
+      <div class="value"><span id="qty">0</span> · <span id="price">€0</span></div>
+    </div>
+
+    <div class="row">
+      <div class="label">Depth: <span id="depthLabel">1</span></div>
+      <input id="depth" type="range" min="1" max="100" value="1" />
+    </div>
+
+    <button id="payBtn" disabled>Pay on Revolut</button>
+    <button id="clearBtn">Clear</button>
+  </div>
+
+  <script type="module" src="./app.js?v=6"></script>
+</body>
+</html>
